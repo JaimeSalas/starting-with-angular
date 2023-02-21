@@ -2,5 +2,9 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 body {
-    padding: 2em;
+    padding: 0.5em; /* rem vs em */
+}
+
+label {
+    padding: 0.5rem;
 }
