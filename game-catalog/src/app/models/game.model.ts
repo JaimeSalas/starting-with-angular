@@ -1,17 +1,21 @@
+import { ISeller } from './seller.model';
+
 export class Game {
   name!: string; // Public
   dateRelease!: Date;
   imageUrl?: string;
+  sellers?: ISeller[];
 
   // JS
   // function(arg1) {}
   // function(arg1, arg2) {}
   // slice
   // splice
-  constructor(name?: string, dateRelease?: string, imageUrl?: string) {
+  constructor(name?: string, dateRelease?: string, imageUrl?: string, sellers?: ISeller[]) {
     this.name = name as string;
     this.dateRelease = new Date(dateRelease as string);
     this.imageUrl = imageUrl;
+    this.sellers = sellers;
   }
 
   getYearsFromRelease(): number {
@@ -40,3 +44,9 @@ export class Game {
 //     propA: string = '';
 //     methodB = () => {};
 // }
+
+// IoC 
+// Inyección de dependencias
+
+
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Game } from './models/game';
+import { Game } from './models/game.model';
 
 @Component({
   selector: 'app-root',

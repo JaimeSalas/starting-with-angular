@@ -14,6 +14,10 @@
 </div> -->
 <div class="container">
   <div *ngFor="let game of games">
+    <!-- <pre>
+      {{ game | json }}
+    </pre> -->
+    <!-- <app-game-summary [game]="game"></app-game-summary> -->
     <app-game-summary [game]="game"></app-game-summary>
   </div>
 </div>
