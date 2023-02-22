@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Game } from '../models/game.model';
 
 @Component({
@@ -7,6 +7,12 @@ import { Game } from '../models/game.model';
 })
 export class GameSummaryComponent {
   @Input() game!: Game; // @Input() game;
+
+  @Output() gameChange: EventEmitter<string> = new EventEmitter<string>();
+
+  selectedGame(gameName: string) {
+    this.gameChange.emit(gameName);
+  }
 }
 
 /*

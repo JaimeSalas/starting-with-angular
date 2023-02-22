@@ -1,23 +1,16 @@
-<h1>
-  {{ title }}
-</h1>
-
-<!-- <div class="row">
-  <div class="col">
-    <label>Name:</label>
-    <span>{{ game.name }}</span>
-  </div>
-  <div class="col">
-    <label>Release Date:</label>
-    <span>{{ game.getYearsFromRelease() }}</span>
-  </div>
-</div> -->
 <div class="container">
-  <div *ngFor="let game of games">
-    <!-- <pre>
-      {{ game | json }}
-    </pre> -->
-    <!-- <app-game-summary [game]="game"></app-game-summary> -->
-    <app-game-summary [game]="game"></app-game-summary>
+  <h1>
+    {{title}}
+  </h1>
+  <div class="row">
+    <div class="col">
+      <button (click)="show=!show" class="btn btn-primary btn-sm float-right">Toggle show games!</button>
+    </div>
   </div>
+  <div class="games-container" *ngIf="show">
+    <div *ngFor="let game of games">
+      <app-game-summary (gameChange)="onGameChange($event)" [game]="game"></app-game-summary>
+    </div>
+  </div>
+  <app-game-sellers></app-game-sellers>
 </div>
