@@ -27,7 +27,23 @@ export class AppComponent implements OnInit {
     this.sellers = retrieveSellers ?? []; // () ? '' : '' 
   }
 
+  createdGameEventHandler($event: any) {
+    debugger
+    const game = this.mapper($event);
+    this.gameService.addGame(game);
+    this.loadGames();
+  }
+
+  private mapper(formValues: any) {
+    return new Game(formValues.name, formValues.daterelease, formValues.imageurl);
+  }
+
   ngOnInit(): void {
+    this.loadGames();
+  }
+
+  private loadGames() {
+    console.log(this.gameService.getGames());
     this.games = this.gameService.getGames();
   }
 }
