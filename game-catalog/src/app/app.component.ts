@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from './models/game.model';
+import { ISeller } from './models/seller.model';
 import { GameStockService } from './services/game-stock.service';
 
 @Component({
@@ -11,6 +12,8 @@ export class AppComponent implements OnInit {
   title = 'Game Catalog';
   // @ts-ignore
   games!: Game[];
+  selectedGameName!: string; 
+  sellers: ISeller[] = [];
   // private _gameService!: GameStockService;
   // @ts-ignore
   // game!: Game;
@@ -19,7 +22,9 @@ export class AppComponent implements OnInit {
   constructor(private gameService: GameStockService) {}
 
   onGameChange(gameName: string) {
-    debugger
+    this.selectedGameName = gameName;
+    const retrieveSellers = this.gameService.getGameSellers(gameName);
+    this.sellers = retrieveSellers ?? []; // () ? '' : '' 
   }
 
   ngOnInit(): void {

@@ -1,16 +1,24 @@
 <div class="container">
   <h1>
-    {{title}}
+    {{ title }}
   </h1>
   <div class="row">
     <div class="col">
-      <button (click)="show=!show" class="btn btn-primary btn-sm float-right">Toggle show games!</button>
+      <button (click)="show = !show" class="btn btn-primary btn-sm float-right">
+        Toggle show games!
+      </button>
     </div>
   </div>
   <div class="games-container" *ngIf="show">
     <div *ngFor="let game of games">
-      <app-game-summary (gameChange)="onGameChange($event)" [game]="game"></app-game-summary>
+      <app-game-summary
+        (gameChange)="onGameChange($event)"
+        [game]="game"
+      ></app-game-summary>
     </div>
   </div>
-  <app-game-sellers></app-game-sellers>
+  <app-game-sellers
+    [gameName]="selectedGameName"
+    [sellers]="sellers"
+  ></app-game-sellers>
 </div>
