@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>
+    {{ title }}
+  </h1>
+  <div class="games-container">
+    <div *ngFor="let game of games">
+      <app-game-summary
+        (gameChange)="onGameChange($event)"
+        [game]="game"
+      ></app-game-summary>
+    </div>
+  </div>
+  <app-game-sellers
+    [gameName]="selectedGameName"
+    [sellers]="sellers"
+  ></app-game-sellers>
+</div>
