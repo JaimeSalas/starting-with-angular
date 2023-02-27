@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ISellerCategory } from '../models/seller-category.model';
 
+
+/*
+{
+  categoryId: 1,
+  taxes: []
+}
+*/
 const sellerCategories: ISellerCategory[] = [
   {
     id: 1,
