@@ -15,6 +15,8 @@ import { SellerCategoryService } from './services/seller-category.service';
 import { NavbarComponent } from './shell/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { UserModule } from './user/user.module';
+
 // ngModel
 // ngForm
 @NgModule({
@@ -32,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    UserModule,
     BrowserAnimationsModule
   ],
   providers: [
