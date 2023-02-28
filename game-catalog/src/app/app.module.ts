@@ -16,6 +16,7 @@ import { NavbarComponent } from './shell/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserModule } from './user/user.module';
+import { SellerDetailsComponent } from './seller/seller-details.component';
 
 // ngModel
 // ngForm
@@ -28,6 +29,7 @@ import { UserModule } from './user/user.module';
     GameListComponent,
     CreateSellerComponent,
     NavbarComponent,
+    SellerDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,19 @@
-<div class="row">
-    <div class="col-3">{{gameName}}</div>
-    <div class="col-9">
-        <div *ngFor="let seller of sellers">
-            <span>{{seller.name}}</span>
+<div>
+    <div>
+        <h2>Game Details</h2>
+        <div class="row">
+            <div class="col-md-2">
+                <!-- TODO: Add the options for filtering -->
+            </div>
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                <!-- Add seller -->
+            </div>
         </div>
     </div>
+    
+    <div *ngFor="let seller of sellers">
+      <app-seller-details [seller]="seller"></app-seller-details>
+    </div>
 </div>
+
