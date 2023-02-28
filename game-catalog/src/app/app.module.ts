@@ -12,6 +12,8 @@ import { GameListComponent } from './game/game-list.component';
 import { appRoutes } from './app.routes';
 import { CreateSellerComponent } from './seller/create-seller.component';
 import { SellerCategoryService } from './services/seller-category.service';
+import { NavbarComponent } from './shell/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // ngModel
 // ngForm
@@ -23,12 +25,14 @@ import { SellerCategoryService } from './services/seller-category.service';
     CreateGameComponent,
     GameListComponent,
     CreateSellerComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule
   ],
   providers: [
     GameStockService, 

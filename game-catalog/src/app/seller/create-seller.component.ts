@@ -31,9 +31,15 @@ const nameValid = (control: AbstractControl): { [key: string]: any } | null => {
         color: #e05c65;
         padding-left: 10px;
       }
+      .error {
+        background-color: #e3c3c5;
+      }
       .error input,
       .error select,
       .error textarea {
+        background-color: #e3c3c5;
+      }
+      .error+select {
         background-color: #e3c3c5;
       }
       .error :: -webkit-input-placeholder {
@@ -48,7 +54,7 @@ const nameValid = (control: AbstractControl): { [key: string]: any } | null => {
     `,
   ],
   providers: [
-    
+
   ]
 })
 export class CreateSellerComponent implements OnInit {

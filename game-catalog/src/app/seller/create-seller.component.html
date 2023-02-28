@@ -8,30 +8,46 @@
     <form [formGroup]="newSellerForm" (ngSubmit)="saveSeller(newSellerForm)">
       <div class="form-group">
         <label for="name">Name:</label>
-        <em *ngIf="name.valid && name.dirty && name?.errors?.['nameValid']">Not start by capital</em>
-        <input type="text" formControlName="name" class="form-control">
+        <em *ngIf="name.valid && name.dirty && name?.errors?.['nameValid']"
+          >Not start by capital</em
+        >
+        <input type="text" formControlName="name" class="form-control" />
       </div>
 
       <div class="form-group">
         <label for="sellercategory">Category</label>
-        <em *ngIf="category.invalid && category.dirty" [ngClass]="{ 'category.invalid && category.dirty': '.error' }" class="float-right">
+        <em *ngIf="category.invalid && category.dirty" [ngClass]="{'error': category.invalid && category.dirty}" class="float-right">
           Required
         </em>
-        <select formControlName="category" class="form-control" (change)="onChangeCategory($event)">
+        <select
+          formControlName="category"
+          class="form-control"
+          (change)="onChangeCategory($event)"
+        >
           <option value="">select category...</option>
-          <option [value]="categoryLookup.id" *ngFor="let categoryLookup of categoryLookupCollection">
+          <option
+            [value]="categoryLookup.id"
+            *ngFor="let categoryLookup of categoryLookupCollection"
+          >
             {{ categoryLookup.name }}
           </option>
         </select>
       </div>
       <div class="form-group">
         <label for="tax">Tax</label>
-        <em *ngIf="tax.invalid && tax.dirty" [ngClass]="{ 'tax.invalid && tax.dirty': '.error' }" class="float-right">
+        <em
+          *ngIf="tax.invalid && tax.dirty"
+          [ngClass]="{ 'tax.invalid && tax.dirty': '.error' }"
+          class="float-right"
+        >
           Required
         </em>
         <select formControlName="tax" class="form-control">
           <option value="">select tax...</option>
-          <option [value]="taxLookup.id" *ngFor="let taxLookup of taxLookupCollection">
+          <option
+            [value]="taxLookup.id"
+            *ngFor="let taxLookup of taxLookupCollection"
+          >
             {{ taxLookup.name }}
           </option>
         </select>
