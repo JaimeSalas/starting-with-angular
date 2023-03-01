@@ -17,6 +17,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserModule } from './user/user.module';
 import { SellerDetailsComponent } from './seller/seller-details.component';
+import { ErrorComponent } from './error.component';
+import {
+  checkDirtyState,
+  CHECK_DIRTY_TOKEN,
+} from './services/check-dirty.service';
 
 // ngModel
 // ngForm
@@ -30,6 +35,7 @@ import { SellerDetailsComponent } from './seller/seller-details.component';
     CreateSellerComponent,
     NavbarComponent,
     SellerDetailsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,12 +43,16 @@ import { SellerDetailsComponent } from './seller/seller-details.component';
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     UserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [
-    GameStockService, 
-    SellerCategoryService
+    GameStockService,
+    SellerCategoryService,
+    {
+      provide: CHECK_DIRTY_TOKEN,
+      useValue: checkDirtyState,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
