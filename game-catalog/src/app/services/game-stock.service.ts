@@ -64,7 +64,7 @@ const games: Game[] = [
 
 // Angular 9 -> provideIn: root 
 @Injectable()
-export class GameStockService {
+export class GameStockService { 
   getGames(): Game[] {
     return games;
   }

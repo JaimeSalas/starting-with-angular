@@ -12,17 +12,11 @@ import { GameStockService } from '../services/game-stock.service';
 export class GameListComponent implements OnInit {
   title = 'Game Catalog';
   games!: Game[];
-  selectedGameName!: string; 
-  sellers: ISeller[] = [];
+  // selectedGameName!: string; 
+  // sellers: ISeller[] = [];
 
 
   constructor(private gameService: GameStockService) {}
-
-  onGameChange(gameName: string) {
-    this.selectedGameName = gameName;
-    const retrieveSellers = this.gameService.getGameSellers(gameName);
-    this.sellers = retrieveSellers ?? []; // () ? '' : '' 
-  }
 
   ngOnInit(): void {
     this.loadGames();

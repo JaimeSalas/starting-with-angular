@@ -1,19 +1,23 @@
-<div>
-    <div>
-        <h2>Game Details</h2>
-        <div class="row">
-            <div class="col-md-2">
-                <!-- TODO: Add the options for filtering -->
-            </div>
-            <div class="col-md-8"></div>
-            <div class="col-md-2">
-                <!-- Add seller -->
-            </div>
-        </div>
+<div class="container">
+  <h2 style="margin-top: 12px">Game Details</h2>
+  <div style="padding-bottom: 12px" class="row">
+    <div class="col-md-2">
+      <!-- TODO: Add the options for filtering -->
     </div>
-    
-    <div *ngFor="let seller of sellers">
-      <app-seller-details [seller]="seller"></app-seller-details>
+    <div class="col-md-8"></div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="toggleAddSeller()">
+        Toggle Add Seller Mode
+      </button>
     </div>
-</div>
+  </div>
 
+  <ng-container *ngIf="!addMode">
+    <app-seller-details
+      *ngFor="let seller of sellers"
+      [seller]="seller"
+    ></app-seller-details>
+  </ng-container>
+
+  <app-create-seller *ngIf="addMode"></app-create-seller>
+</div>
