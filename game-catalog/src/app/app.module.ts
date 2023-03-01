@@ -22,6 +22,7 @@ import {
   checkDirtyState,
   CHECK_DIRTY_TOKEN,
 } from './services/check-dirty.service';
+import { MaterialModule } from './shared/material.module';
 
 // ngModel
 // ngForm
@@ -43,6 +44,7 @@ import {
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     UserModule,
+    MaterialModule,
     BrowserAnimationsModule,
   ],
   providers: [

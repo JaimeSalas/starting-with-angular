@@ -36,6 +36,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { AvailablePipe } from './available.pipe';
 
 @NgModule({
   exports: [
@@ -74,7 +75,11 @@ import { MatTableModule } from '@angular/material/table';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    AvailablePipe
+  ],
+  declarations: [
+    AvailablePipe
   ]
 })
 export class MaterialModule { }
