@@ -12,6 +12,8 @@ export class GameSellersComponent implements OnInit {
   sellers: ISeller[] = [];
   gamName = '';
   addMode = false;
+  sortBy = 'asc'; 
+  filterBy = 'all';
 
   constructor(
     private route: ActivatedRoute,
@@ -24,10 +26,11 @@ export class GameSellersComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    const { name, sellers } = this.gameStockService.getGame(id) as Game;
-    this.sellers = sellers as ISeller[];
-    this.gamName = name;
+    this.gameStockService.getGame(id).subscribe({
+      next: (g) => {
+        this.gamName = g.name;
+        this.sellers = g.sellers || [];
+      }
+    });
   }
-  // @Input() sellers!: ISeller[];
-  // @Input() gameName!: string;
 }

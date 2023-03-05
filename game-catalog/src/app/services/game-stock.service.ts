@@ -1,86 +1,86 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { Game } from '../models/game.model';
 import { ISeller } from '../models/seller.model';
 
-const games: Game[] = [
-  new Game(
-    'Super Mario Bros',
-    '13 September 1985',
-    // tslint:disable-next-line:max-line-length
-    'http://cdn02.nintendo-europe.com/media/images/10_share_images/games_15/virtual_console_nintendo_3ds_7/SI_3DSVC_SuperMarioBros_image1280w.jpg',
-    [
-      {
-        id: 1,
-        name: 'Old shop',
-        price: 95,
-        amount: 2,
-        isAvailable: true,
-      },
-      {
-        id: 2,
-        name: 'New shop',
-        price: 115,
-        amount: 1,
-        isAvailable: true,
-      },
-      {
-        id: 3,
-        name: 'Regular shop',
-        price: 135,
-        amount: 0,
-        isAvailable: false,
-      }
-    ]
-  ),
-  new Game(
-    'Legend of Zelda',
-    '21 February 1986',
-    // tslint:disable-next-line:max-line-length
-    'https://as01.epimg.net/meristation/imagenes/2021/02/21/reportajes/1613888485_682494_1613888565_noticia_normal.jpg',
-    [
-      {
-        id: 3,
-        name: 'Old shop',
-        price: 125,
-        amount: 0,
-        isAvailable: false,
-      },
-      {
-        id: 4,
-        name: 'New shop',
-        price: 145,
-        amount: 1,
-        isAvailable: true,
-      },
-    ]
-  ),
-  new Game(
-    'Sonic',
-    '26 June 1981',
-    'https://i.ytimg.com/vi/dfFd7Bu6xnc/hqdefault.jpg',
-  ),
-];
-
-
-// Angular 9 -> provideIn: root 
+// Angular 9 -> provideIn: root
 @Injectable()
-export class GameStockService { 
-  getGames(): Game[] {
-    return games;
+export class GameStockService {
+  private games: Game[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  getGames(): Observable<Game[]> {
+    if (this.games.length > 0) {
+      return of(this.games);
+    }
+    return this.http.get<Game[]>('/api/games').pipe(
+      tap((data) => console.log(data)),
+
+      map((data) => {
+        this.games = data.map(this.mapGame);
+        return this.games;
+      })
+    );
   }
 
-  getGame(name: string) {
-    // == ===
-    // '7' == 7 -> true
-    // '7' === 7 -> false
-    return games.find((g) => g.name === name);
+  private mapGame = (gameServer: any): Game => {
+    if (gameServer.sellers && gameServer.sellers.length > 0) {
+      return new Game(gameServer.name, gameServer.dateRelease, gameServer.imageUrl, gameServer.sellers);
+    }
+
+    return new Game(gameServer.name, gameServer.dateRelease, gameServer.imageUrl, []);
+  }
+    
+
+  getGame(name: string): Observable<Game> {
+    return this.getGames().pipe(
+      map((games) => {
+        const game = games.find((g) => g.name === name) as Game;
+        return game;
+      })
+    );
   }
 
-  getGameSellers(name: string): ISeller[] | null {
-    return this.getGame(name)?.sellers || null;
+  getGameSellers(name: string): Observable<ISeller[]> {
+    return this.getGame(name).pipe(map((game) => game.sellers || []));
   }
 
-  addGame(game: Game): void {
-    games.push(game);
+  addGame(game: Game): Observable<Game> {
+    // games.push(game);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.createGame(game, headers);
+  }
+
+  private createGame(game: Game, headers: HttpHeaders): Observable<Game> {
+    return this.http
+      .post<Game>('', game, { headers })
+      .pipe(tap((data) => this.games.push(data)));
+  }
+
+  updateGame(game: Game): Observable<Game> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put<Game>('', game, { headers }).pipe(
+      tap(
+        (g) =>
+          (this.games = this.games.map((game) => {
+            if (game.name === g.name) {
+              return g;
+            }
+            return game;
+          }))
+      )
+    );
+  }
+
+  deleteGame(name: string): Observable<Game> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete<Game>('', { headers }).pipe(
+      tap(() => {
+        this.games = this.games.filter((g) => g.name !== name);
+      })
+    );
   }
 }

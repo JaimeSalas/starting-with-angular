@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Game } from '../models/game.model';
-import { ISeller } from '../models/seller.model';
 import { GameStockService } from '../services/game-stock.service';
 
 @Component({
@@ -9,20 +9,26 @@ import { GameStockService } from '../services/game-stock.service';
   styles: [
   ]
 })
-export class GameListComponent implements OnInit {
+export class GameListComponent implements OnInit, OnDestroy {
   title = 'Game Catalog';
   games!: Game[];
-  // selectedGameName!: string; 
-  // sellers: ISeller[] = [];
-
+  gamesSubscription!: Subscription;
 
   constructor(private gameService: GameStockService) {}
-
+  
   ngOnInit(): void {
     this.loadGames();
   }
 
+  ngOnDestroy(): void {
+    this.gamesSubscription.unsubscribe();
+  }
+
   private loadGames() {
-    this.games = this.gameService.getGames();
+    this.gamesSubscription = this.gameService.getGames().subscribe({
+      next: (games) => {
+        this.games = games;
+      }
+    });
   }
 }

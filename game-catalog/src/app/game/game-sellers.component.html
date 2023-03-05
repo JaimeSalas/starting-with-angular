@@ -2,21 +2,27 @@
   <h2 style="margin-top: 12px">Game Details</h2>
   <div style="padding-bottom: 12px" class="row">
     <div class="col-md-2">
-      <!-- TODO: Add the options for filtering -->
+      <h3>Sellers</h3>
     </div>
-    <div class="col-md-8"></div>
+    <div class="col-md-8">
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-secondary" [class.active]="sortBy==='asc'" (click)="sortBy='asc'">Sort asc price</button>
+        <button class="btn btn-secondary" [class.active]="sortBy==='desc'" (click)="sortBy='desc'">Sort desc price</button>
+      </div>
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-secondary" [class.active]="filterBy==='all'" (click)="filterBy='all'">All sellers</button>
+        <button class="btn btn-secondary" [class.active]="filterBy==='available'" (click)="filterBy='available'">Available stock</button>
+      </div>
+    </div>
     <div class="col-md-2">
       <button class="btn btn-primary" (click)="toggleAddSeller()">
-        Toggle Add Seller Mode
+        Add Seller Mode
       </button>
     </div>
   </div>
 
   <ng-container *ngIf="!addMode">
-    <app-seller-details
-      *ngFor="let seller of sellers"
-      [seller]="seller"
-    ></app-seller-details>
+    <app-seller-list [sortBy]="sortBy" [filterBy]="filterBy" [sellers]="sellers"></app-seller-list>
   </ng-container>
 
   <app-create-seller *ngIf="addMode"></app-create-seller>

@@ -23,6 +23,8 @@ import {
   CHECK_DIRTY_TOKEN,
 } from './services/check-dirty.service';
 import { MaterialModule } from './shared/material.module';
+import { SellerListComponent } from './seller/seller-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 // ngModel
 // ngForm
@@ -37,6 +39,7 @@ import { MaterialModule } from './shared/material.module';
     NavbarComponent,
     SellerDetailsComponent,
     ErrorComponent,
+    SellerListComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { MaterialModule } from './shared/material.module';
     UserModule,
     MaterialModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [
     GameStockService,
